@@ -50,6 +50,8 @@ router.post("/", asyncMiddleware(async (req, res) => {
 }));
 
 router.get('/', asyncMiddleware(async (req, res) => {
+  console.log("Client IP/host", req.ip, req.hostname);
+  console.log("Headers", req.headers);
   const todos = await prisma.TodoItem.findMany();
   res.json(todos);
 }));
