@@ -13,6 +13,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
+const proxyDepth = parseInt(process.env.ADAPTABLE_TRUST_PROXY_DEPTH);
+console.log("Proxy Depth", proxyDepth);
+
+if (proxyDepth > 0) {
+    app.set('trust proxy', proxyDepth + 1);
+}
+
 // Routes
 app.use('/todos', todosRouter);
 
